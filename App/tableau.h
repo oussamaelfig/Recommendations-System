@@ -137,9 +137,7 @@ Tableau<T>::~Tableau() {
 
 template <class T>
 void Tableau<T>::vider() {
-    capacite = 4;
     nbElements = 0;
-    elements = new T[capacite];
 }
 
 template <class T>
@@ -202,20 +200,26 @@ template <class T>
 int Tableau<T>::occurrence(const T & element) const {
     int res = 0;
     for (int i=0; i<nbElements; i++)
-        if (element == arr[i])
+        if (element == elements[i])
           res++;
     return res;
 }
 
 template <class T>
 void Tableau<T>::unique() {
-	int j = 0;
- 
-    for (int i=0; i < nbElements-1; i++)
-        if (arr[i] != arr[i+1])
-            arr[j++] = arr[i];
- 
-    arr[j++] = arr[nbElements-1];
+	
+ for (int i=0; i < nbElements; i++){
+        for(int j=0;j<i;j++){
+
+            if(elements[i]==elements[j]){
+                nbElements--;
+                for (int k=i; k<nbElements; k++){
+                    elements[k]=elements[k+1];
+                }
+                i--;
+            }
+        }
+    }
 }
 
 template <class T>
@@ -278,7 +282,12 @@ bool Tableau<T>::operator == (const Tableau<T> & autre) const {
 
 template <typename U>
 std::ostream & operator << (std::ostream & os, const Tableau<U> & tab) {
-	// À compléter
+	
+	for (int i = 0; i < tab.nbElements; i++)
+	{
+		os << tab.elements[i] << ";";
+	}
+	    return os;
 }
 
 #endif

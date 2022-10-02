@@ -1,0 +1,3 @@
+C:/Users/oussa/Desktop/Home Folder/UQAM_AUTOMNE_2022/INF3105/Recommendations-System/cmake-build-debug/CMakeFiles/Recommendations_System.dir
+C:/Users/oussa/Desktop/Home Folder/UQAM_AUTOMNE_2022/INF3105/Recommendations-System/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/oussa/Desktop/Home Folder/UQAM_AUTOMNE_2022/INF3105/Recommendations-System/cmake-build-debug/CMakeFiles/rebuild_cache.dir
