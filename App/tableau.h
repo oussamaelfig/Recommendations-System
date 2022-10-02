@@ -18,6 +18,10 @@ class Tableau{
 		Tableau(const Tableau & autre);
     ~Tableau();
 
+
+	// redimensionner un tablea en doublant sa capacite
+    void redimensionner(int nouvCapacite);
+
 	  /** 
 		 * description:  ajoute un élément à la fin.
 		 *
@@ -196,12 +200,22 @@ void Tableau<T>::enlever(int index) {
 
 template <class T>
 int Tableau<T>::occurrence(const T & element) const {
-	// À compléter
+    int res = 0;
+    for (int i=0; i<nbElements; i++)
+        if (element == arr[i])
+          res++;
+    return res;
 }
 
 template <class T>
 void Tableau<T>::unique() {
-	// À compléter
+	int j = 0;
+ 
+    for (int i=0; i < nbElements-1; i++)
+        if (arr[i] != arr[i+1])
+            arr[j++] = arr[i];
+ 
+    arr[j++] = arr[nbElements-1];
 }
 
 template <class T>
