@@ -174,11 +174,23 @@ Tableau<std::string> Membre::suggestion(const Membre &autre) const
 	return resultat;
 }
 
-/*
+
 Tableau<std::string> Membre::suggestion(const Tableau<Membre> &com) const
 {
 	// À compléter
+	Tableau<std::string> resultat;
+	Tableau<std::string> buff;
+	for (int i = 0; i < com.taille(); i++)
+	{
+		buff = suggestion(com[i]);
+		for (int j = 0; j < buff.taille(); j++)
+		{
+			if(resultat.occurrence(buff[j]) == 0 ){
+				resultat.ajouter(buff[j]);
+			}
+		}
+	}
+	return resultat;
 }
-*/
 
 #endif
