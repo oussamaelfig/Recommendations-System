@@ -17,8 +17,10 @@ int main(int argc, char** argv) {
 	const char * fichier = "groupe.txt";
 	Tableau<Membre> membres = extraire(fichier);
 	bool suggestion_bool = true;
+
 	// harry lula
 	Tableau<std::string> suggestion_harry_lula = membres[0].suggestion(membres[1]); 
+	
 	if(suggestion_harry_lula.taille() != 3){
 		std::cout << " ==> ECHEC Nombre de suggestions harry" << std::endl;
 		suggestion_bool = false;

@@ -143,7 +143,7 @@ void Tableau<T>::vider() {
 template <class T>
 void Tableau<T>::redimensionner(int nouvCapacite){
     capacite = nouvCapacite;
-    T *tmp = new T[nouvCapacite];
+    T *tmp = new T[capacite];
     for (int i = 0; i < nbElements; i++)
     {
         tmp[i] = elements[i];
@@ -160,8 +160,7 @@ int Tableau<T>::taille() const {
 
 template <class T>
 void Tableau<T>::ajouter(const T & item) {
-    assert(nbElements <= capacite);
-    if (capacite == nbElements)
+    if (nbElements>=capacite)
     {
         redimensionner(capacite * 2);
     }
@@ -182,7 +181,7 @@ void Tableau<T>::inserer(const T & element, int index) {
     }
 
     // ajouter
-    elements[index] = element;
+    elements[index-1] = element;
     nbElements++;
 }
 

@@ -79,9 +79,10 @@ public:
 	 */
 	Tableau<std::string> suggestion(const Tableau<Membre> &com) const;
 
+	Tableau<std::string> favs;
+
 private:
 	std::string id;
-	Tableau<std::string> favs;
 
 	/**
 	 * description:  surcharge des opérateurs de comparaisons ==, !=, <= et >=
@@ -153,14 +154,13 @@ void Membre::ajouterFavori(const std::string &content)
 Tableau<std::string> Membre::suggestion(const Membre &autre) const
 {
 	Tableau<std::string> resultat;
-	// std::cout <<  this->favs.taille << std::endl;
-	// std::cout << autre taille: "<< autre.favs.taille() << std::endl;
+
 	for (int i = 0; i < autre.favs.taille(); i++)
 	{
 		int j;
 		for (j = 0; j < this->favs.taille(); j++)
 		{
-			if (autre.favs[i] == this->favs[i])
+			if (autre.favs[i] == this->favs[j])
 			{
 				break;
 			}
