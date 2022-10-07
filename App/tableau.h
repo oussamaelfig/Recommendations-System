@@ -181,7 +181,7 @@ void Tableau<T>::inserer(const T & element, int index) {
     }
 
     // ajouter
-    elements[index-1] = element;
+    elements[index] = element;
     nbElements++;
 }
 
