@@ -223,7 +223,7 @@ int Tableau<T>::occurrence(const T &element) const
 template <class T>
 void Tableau<T>::echanger(T *x, T *y)
 {
-    int temp = *x;
+    T temp = *x;
     *x = *y;
     *y = temp;
 }
@@ -231,7 +231,7 @@ void Tableau<T>::echanger(T *x, T *y)
 template <class T>
 int Tableau<T>::partionner(int min, int max)
 {
-    int pivot = elements[max];
+    T pivot = elements[max];
     int index = min - 1;
     for (int j = min; j < max; j++)
     {
