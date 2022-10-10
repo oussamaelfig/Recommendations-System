@@ -280,23 +280,6 @@ void Tableau<T>::unique()
     }
     delete[] elements;
     elements = buff;
-
-    /*for (int i = 0; i < nbElements; i++)
-    {
-        for (int j = 0; j < i; j++)
-        {
-
-            if (elements[i] == elements[j])
-            {
-                nbElements--;
-                for (int k = i; k < nbElements; k++)
-                {
-                    elements[k] = elements[k + 1];
-                }
-                i--;
-            }
-        }
-    }*/
 }
 
 template <class T>
