@@ -100,11 +100,8 @@ private:
     int nbElements;
     int capacite;
 
-    void triRapide(int min, int max);
-
-    int partionner(int min, int max);
-
-    void echanger(T *x, T *y);
+    void triFusion(int min, int max);
+    void fusionner(int min, int milieu, int max);
 
     /**
      * description:  surcharge de l'opérateur d'affichage <<. Cet
@@ -202,7 +199,7 @@ void Tableau<T>::inserer(const T &element, int index)
 template <class T>
 void Tableau<T>::enlever(int index)
 {
-    assert( index >= 0 && index <= nbElements);
+    assert(index >= 0 && index <= nbElements);
     for (int i = index; i < nbElements - 1; i++)
     {
         elements[i] = elements[i + 1];
@@ -221,49 +218,79 @@ int Tableau<T>::occurrence(const T &element) const
 }
 
 template <class T>
-void Tableau<T>::echanger(T *x, T *y)
+void Tableau<T>::fusionner(int min, int milieu, int max)
 {
-    int temp = *x;
-    *x = *y;
-    *y = temp;
-}
+    int longueur1 = milieu - min + 1;
+    int longueur2 = max - milieu;
 
-template <class T>
-int Tableau<T>::partionner(int min, int max)
-{
-    int pivot = elements[max];
-    int index = min - 1;
-    for (int j = min; j < max; j++)
+    T tab1[longueur1];
+    T tab2[longueur2];
+
+    for (int i = 0; i < longueur1; i++)
     {
-        if (elements[j] < pivot) {
-            ++index;
-            echanger(&elements[index], &elements[j]);
-        }
+        tab1[i] = elements[min + i];
     }
-    echanger(&elements[index + 1], &elements[max]);
-    return (index + 1);
+    for (int i = 0; i < longueur2; i++)
+    {
+        tab2[i] = elements[milieu + i + 1];
+    }
+
+    int i = 0;
+    int j = 0;
+    int k = min;
+
+    while (i < longueur1 && j < longueur2)
+    {
+        if (tab1[i] <= tab2[j])
+        {
+            elements[k] = tab1[i];
+            i++;
+        }
+        else
+        {
+            elements[k] = tab2[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < longueur1)
+    {
+        elements[k] = tab1[i];
+        i++;
+        k++;
+    }
+    
+    while (j < longueur2)
+    {
+        elements[k] = tab2[j];
+        j++;
+        k++;
+    }
 }
 
 template <class T>
-void Tableau<T>::triRapide(int min, int max)
+void Tableau<T>::triFusion(int min, int max)
 {
-    if(min < max)
+    if (min < max)
     {
-        int part = partionner(min, max);
-        triRapide(min, part - 1);
-        triRapide(part + 1, max);
+        int milieu = (min + max) / 2;
+        triFusion(min, milieu);
+        triFusion(milieu + 1, max);
+        fusionner(min, milieu, max);
     }
 }
 
 template <class T>
 void Tableau<T>::unique()
 {
-    // tri insertion -->O(nlogn) et on traverse le tableau par la suite delete doublons.
-    if(taille() <= 1)
+    // tri fusion -->O(nlogn) et on traverse le tableau par la suite delete doublons.
+    if (taille() <= 1)
     {
         return;
     }
-    triRapide(0, taille() - 1);
+   // triRapide(0, taille() - 1);
+    triFusion(0, taille() - 1);
     T temp = elements[0];
     T *buff = new T[capacite];
     int j = 0;
@@ -271,7 +298,7 @@ void Tableau<T>::unique()
     nbElements = 0;
     for (int i = 1; i < capacite; i++)
     {
-        if(buff[j] != elements[i])
+        if (buff[j] != elements[i])
         {
             buff[j + 1] = elements[i];
             ++nbElements;
