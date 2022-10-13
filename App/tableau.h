@@ -19,8 +19,7 @@ public:
     Tableau(const Tableau &autre);
     ~Tableau();
 
-    // redimensionner un tablea en doublant sa capacite
-    void redimensionner(int nouvCapacite);
+   
 
     /**
      * description:  ajoute un élément à la fin.
@@ -102,7 +101,8 @@ private:
 
     void triFusion(int min, int max);
     void fusionner(int min, int milieu, int max);
-
+     // redimensionner un tablea en doublant sa capacite
+    void redimensionner(int nouvCapacite);
     /**
      * description:  surcharge de l'opérateur d'affichage <<. Cet
      * 							 opérateur permettra d'afficher, sur une ligne,
@@ -180,6 +180,7 @@ void Tableau<T>::ajouter(const T &item)
 template <class T>
 void Tableau<T>::inserer(const T &element, int index)
 {
+    assert(index >= 0);
     // redimensionner
     if (nbElements == capacite)
     {
